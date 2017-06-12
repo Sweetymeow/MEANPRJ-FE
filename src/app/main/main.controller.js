@@ -10,14 +10,15 @@ export class MainController {
         var vm = this; // view model
         this.$http.get('http://localhost:5000/api/message')
             .then(function(result){
-                vm.theMessages = result.data;    
+                vm.theMessages = result.data;
             //console.log(result);
             });
     }
-    postMessage() {
+    postMessage($window, $log) {
         this.$http.post('http://localhost:5000/api/message', {
             msg: this.message
         });
-        console.log("Postmessage feature");
+        $window.location.reload(); // Reload to refresh page and show message on page
+        $log("Postmessage feature: " + this.message);
     }
 }
